@@ -41,6 +41,9 @@ int main()
             {
                 printf("%d/%d/%d est plus tot que %d/%d/%d", mm2, jj2, aa2, mm1, jj1, aa1);
             }
+            else {
+                printf("%d/%d/%d et %d/%d/%d sont egaux", mm2, jj2, aa2, mm1, jj1, aa1);
+            }
         }
     }
 }
