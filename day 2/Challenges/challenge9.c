@@ -1,8 +1,8 @@
 #include <stdio.h>
 int main(void)
 {
-    char num[8];
-    char valid_num[8];
+    char num[100];
+    char valid_num[100];
 
     printf("donner le numero de telephone: ");
 
