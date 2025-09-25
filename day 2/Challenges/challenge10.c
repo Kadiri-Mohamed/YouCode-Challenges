@@ -40,7 +40,7 @@ int main(void)
         }
         else if (maj_alpha == 'Q' || maj_alpha == 'Z')
         {
-            somme += 8;
+            somme += 10;
         }
         else
         {
