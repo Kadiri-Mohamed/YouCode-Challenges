@@ -5,10 +5,10 @@ int main()
 {
     int list[10];
     int n;
-    int count = 0;
+    int i = 0;
     int size = sizeof(list) / sizeof(list[0]);
 
-    while (count < size)
+    while (i < size)
     {
         printf("Enter nombre: ");
         scanf("%d", &n);
@@ -16,17 +16,16 @@ int main()
         {
             break;
         }
-        list[count] = n;
-        count++;
+        list[i] = n;
+        i++;
     }
 
-    for (int x = 0; x < count; x++)
+    for (int x = 0; x < i; x++)
     {
-        int num = list[x];
         int counter = 0;
-        for (int j = 0; j < count; j++)
+        for (int j = 0; j < i; j++)
         {
-            if (num == list[j])
+            if (list[x] == list[j])
             {
                 counter++;
             }
