@@ -21,11 +21,14 @@ int main()
 
         n /= 10;
     }
-
+    for (int b = 0; b < 10; b++)
+    {
+        printf("%d ", b);
+    }
+    printf("\n");
     for (int x = 0; x < 10; x++)
     {
         counter = 0;
-        printf("%d ", x);
         for (int j = 0; j < i; j++)
         {
             if (x == list[j])
@@ -33,7 +36,7 @@ int main()
                 counter++;
             }
         }
-        printf("%d \n", counter);
+        printf("%d ", counter);
     }
 
     return 0;
