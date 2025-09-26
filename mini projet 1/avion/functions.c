@@ -12,21 +12,21 @@ int counter = 1;
 
 void ajouter_avion()
 {
-    if (counter >= MAX) 
+    if (counter >= MAX)
     {
         printf("La liste est complete\n");
         return;
     }
-    
+
     id[counter - 1] = counter;
     printf("Donner le modele d'avion: ");
-    scanf(" %[^\n]", modele[counter - 1]); 
+    scanf(" %[^\n]", modele[counter - 1]);
     printf("Donner la capacite d'avion: ");
-    scanf("%d", &capacite[counter - 1]);    
+    scanf("%d", &capacite[counter - 1]);
     printf("Donner le status d'avion: ");
-    scanf(" %[^\n]", status[counter - 1]); 
+    scanf(" %[^\n]", status[counter - 1]);
     printf("Donner la date d'entree d'avion: ");
-    scanf(" %[^\n]", date_entree[counter - 1]); 
+    scanf(" %[^\n]", date_entree[counter - 1]);
 
     counter++;
 }
@@ -34,9 +34,9 @@ void ajouter_avion()
 int lister_avions()
 {
     printf("Liste des avions:\n");
-    for (int i = 0; i < counter - 1; i++) 
+    for (int i = 0; i < counter - 1; i++)
     {
-        printf("ID: %d, Modele: %s, Capacite: %d, Status: %s, Date d'entree: %s\n", 
+        printf("ID: %d, Modele: %s, Capacite: %d, Status: %s, Date d'entree: %s\n",
                id[i], modele[i], capacite[i], status[i], date_entree[i]);
     }
     return 0;
@@ -44,7 +44,38 @@ int lister_avions()
 
 int modifier_avion()
 {
-    printf("Modifier fonctionnalite a implementer\n");
+    int searched_id;
+    
+    printf("Entrez un id: ");
+    scanf("%d", &searched_id)  ;
+    
+    int found = 0;
+    for (int i = 0; i < counter; i++)
+    {
+        if (searched_id == id[i])  
+        {
+            found = 1;
+            printf("Donner le modele d'avion: ");
+            scanf(" %[^\n]", modele[i]);  
+            
+            printf("Donner la capacite d'avion: ");
+            scanf("%d", &capacite[i]);   
+            
+            printf("Donner le status d'avion: ");
+            scanf(" %[^\n]", status[i]);  
+            
+            printf("Donner la date d'entree d'avion: ");
+            scanf(" %[^\n]", date_entree[i]); 
+            
+            printf("Modification reussie!\n");
+            break;  
+        }
+    }
+    
+    if (!found) {
+        printf("Avion avec ID %d non trouve\n", searched_id);
+    }
+    
     return 0;
 }
 
