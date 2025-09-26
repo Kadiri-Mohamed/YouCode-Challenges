@@ -4,8 +4,8 @@
 
 extern int choise;
 extern int id[MAX];
-extern char modele[MAX][20];
 extern int capacite[MAX];
+extern char modele[MAX][20];
 extern char status[MAX][20];
 extern char date_entree[MAX][20];
 extern int counter;
