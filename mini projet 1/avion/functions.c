@@ -34,7 +34,7 @@ void ajouter_avion()
 int lister_avions()
 {
     printf("Liste des avions:\n");
-    for (int i = 0; i < counter - 1; i++)  // Only show existing planes
+    for (int i = 0; i < counter - 1; i++) 
     {
         printf("ID: %d, Modele: %s, Capacite: %d, Status: %s, Date d'entree: %s\n", 
                id[i], modele[i], capacite[i], status[i], date_entree[i]);
