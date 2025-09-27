@@ -12,40 +12,50 @@ int counter = 1;
 void ajouter_avion()
 {
     int status_choise;
+    int num_avions;
+    printf("Combien d'avions ? ");
+    scanf("%d", &num_avions);
+    for (int i = 0; i < num_avions; i++)
+    {
 
+        id[counter - 1] = counter;
+
+        printf("Donner le modele d'avion: ");
+        scanf(" %[^\n]", modele[counter - 1]);
+
+        printf("Donner la capacite d'avion: ");
+        scanf("%d", &capacite[counter - 1]);
+
+        printf("Donner le status d'avion [1:disponible ,2:En maintenece ,3:En vole]: ");
+        scanf("%d", &status_choise);
+        switch (status_choise)
+        {
+        case 1:
+            strcpy(status[counter - 1], "Disponible");
+            break;
+        case 2:
+            strcpy(status[counter - 1], "En maintenece");
+            break;
+        case 3:
+            strcpy(status[counter - 1], "En vole");
+            break;
+        default:
+            strcpy(status[counter - 1], "Status invalide");
+            break;
+        }
+
+        printf("Donner la date d'entree d'avion (JJ/MM/AAAA): ");
+        scanf(" %[^\n]", date_entree[counter - 1]);
+
+        printf("Avion ajoute avec succes avec l id = %d\n" , id[counter - 1]);
+
+        counter++;
+    }
     if (counter >= MAX)
     {
         printf("La liste est complete\n");
         return;
     }
-
-    id[counter - 1] = counter;
-    printf("Donner le modele d'avion: ");
-    scanf(" %[^\n]", modele[counter - 1]);
-    printf("Donner la capacite d'avion: ");
-    scanf("%d", &capacite[counter - 1]);
-    printf("Donner le status d'avion [1:disponible ,2:En maintenece ,3:En vole]: ");
-    scanf("%d", &status_choise);
-    switch (status_choise)
-    {
-    case 1:
-        strcpy(status[counter - 1], "Disponible");
-        break;
-    case 2:
-        strcpy(status[counter - 1], "En maintenece");
-        break;
-    case 3:
-        strcpy(status[counter - 1], "En vole");
-        break;
-    default:
-        strcpy(status[counter - 1], "Status invalide");
-        break;
-    }
-
-    printf("Donner la date d'entree d'avion: ");
-    scanf(" %[^\n]", date_entree[counter - 1]);
-
-    counter++;
 }
 
 int lister_avions()
@@ -55,7 +65,7 @@ int lister_avions()
     {
         printf("Avion %d \n", i + 1);
         printf("ID: %d, Modele: %s, Capacite: %d, Status: %s, Date d'entree: %s\n", id[i], modele[i], capacite[i], status[i], date_entree[i]);
-        printf("------------------------------------------------------------ \n");
+        printf("---------------------------------------------------------------------------- \n");
     }
     return 0;
 }
@@ -182,12 +192,11 @@ int rechercher_avion()
 
 int supprimer_avion()
 {
-   
+
     int searched_id;
     int found = 0;
     printf("Entrez un id: ");
     scanf("%d", &searched_id);
-    
     for (int i = 0; i < counter; i++)
     {
         if (searched_id == id[i])
@@ -211,5 +220,4 @@ int supprimer_avion()
         printf("Avion avec ID %d non trouve\n", searched_id);
     }
     return 0;
-
 }
