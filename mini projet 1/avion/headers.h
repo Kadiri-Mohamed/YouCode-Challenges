@@ -1,6 +1,7 @@
 #ifndef HEADERS_H
 #define HEADERS_H
 #define MAX 100
+#include <string.h>
 
 extern int choise;
 extern int id[MAX];
