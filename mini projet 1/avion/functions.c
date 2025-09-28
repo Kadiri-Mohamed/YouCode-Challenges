@@ -47,7 +47,7 @@ void ajouter_avion()
         printf("Donner la date d'entree d'avion (JJ/MM/AAAA): ");
         scanf(" %[^\n]", date_entree[counter - 1]);
 
-        printf("Avion ajoute avec succes avec l id = %d\n" , id[counter - 1]);
+        printf("Avion ajoute avec succes avec l id = %d\n", id[counter - 1]);
 
         counter++;
     }
@@ -137,6 +137,7 @@ int rechercher_model()
         {
             found = 1;
             printf("ID: %d, Modele: %s, Capacite: %d, Status: %s, Date d'entree: %s\n", id[i], modele[i], capacite[i], status[i], date_entree[i]);
+            printf("---------------------------------------------------------------------------- \n");
             return 1;
         }
     }
@@ -156,6 +157,7 @@ int rechercher_id(int searched_id)
         {
             found = 1;
             printf("ID: %d, Modele: %s, Capacite: %d, Status: %s, Date d'entree: %s\n", id[i], modele[i], capacite[i], status[i], date_entree[i]);
+            printf("---------------------------------------------------------------------------- \n");
             return id[i];
         }
     }
@@ -220,4 +222,48 @@ int supprimer_avion()
         printf("Avion avec ID %d non trouve\n", searched_id);
     }
     return 0;
+}
+
+int main_menu(){
+    int choise; 
+
+    do
+    {
+        // system("cls");
+        printf("Pour ajouter un avion entrez 1\n");
+        printf("Pour modifier un avion entrez 2\n");
+        printf("Pour supprimer un avion entrez 3\n");
+        printf("Pour afficher la liste des avion entrez 4\n");
+        printf("Pour Rechercher un avion entrez 5\n");
+        printf("Pour quitter entrez 0\n");
+
+        printf("Entrez votre choix: ");
+        scanf("%d", &choise);
+
+        switch (choise)
+        {
+        case 1:
+            ajouter_avion();
+            break;
+        case 2:
+            modifier_avion();
+            break;
+        case 3:
+            supprimer_avion();
+            break;
+        case 4:
+            lister_avions();
+            break;
+        case 5:
+            rechercher_avion();
+            break;
+        case 0:
+            printf("End of programme\n");
+            break;
+        default:
+            printf("choix invalide\n");
+            break;
+        }
+
+    } while (choise != 0);
 }
