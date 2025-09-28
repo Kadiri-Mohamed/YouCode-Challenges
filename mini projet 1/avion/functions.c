@@ -64,10 +64,67 @@ void ajouter_avion()
 
 int lister_avions()
 {
+    printf("Liste des avions:\n");
+    for (int i = 0; i < counter - 1; i++)
+    {
+        printf("Avion %d \n", i + 1);
+        printf("\033[33m" "ID: %d, Modele: %s, Capacite: %d, Status: %s, Date d'entree: %s\n" "\033[0m", avions[i].id, avions[i].modele, avions[i].capacite, avions[i].status, avions[i].date_entree);
+        printf("---------------------------------------------------------------------------- \n");
+    }
+    return 0;
 }
 
 int modifier_avion()
 {
+    int searched_id;
+    int status_choise;
+    printf("Entrez un id: ");
+    scanf("%d", &searched_id);
+
+    int found = 0;
+    for (int i = 0; i < counter; i++)
+    {
+        if (searched_id == avions[i].id)
+        {
+            found = 1;
+            printf("Donner le modele d'avion: ");
+            scanf(" %[^\n]", avions[i].modele);
+
+            printf("Donner la capacite d'avion: ");
+            scanf("%d", &avions[i].capacite);
+
+            printf("Donner le status d'avion [1:disponible ,2:En maintenece ,3:En vole]: ");
+            scanf("%d", &status_choise);
+            switch (status_choise)
+            {
+            case 1:
+                strcpy(avions[i].status, "Disponible");
+                break;
+            case 2:
+                strcpy(avions[i].status, "En maintenece");
+                break;
+            case 3:
+                strcpy(avions[i].status, "En vole");
+                break;
+            default:
+                strcpy(avions[i].status, "Status invalide");
+                break;
+            }
+
+            printf("Donner la date d'entree d'avion: ");
+            scanf(" %[^\n]", avions[i].date_entree);
+
+            printf("\033[32m" "Modification reussie!\n" "\033[0m" );
+            break;
+        }
+    }
+
+    if (!found)
+    {
+        printf("\033[31m" "Avion avec ID %d non trouve\n" "\033[0m", searched_id);
+    }
+
+    return 0;
 }
 int rechercher_id(int searched_id)
 {
