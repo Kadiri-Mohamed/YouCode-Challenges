@@ -50,16 +50,20 @@ void ajouter_avion()
         printf("Donner la date d'entree d'avion (JJ/MM/AAAA): ");
         scanf(" %[^\n]", avions[counter - 1].date_entree);
 
-        printf("\033[32m" "Avion ajoute avec succes avec l'id = %d\n" "\033[0m", avions[counter - 1].id);
+        printf("\033[32m"
+               "Avion ajoute avec succes avec l'id = %d\n"
+               "\033[0m",
+               avions[counter - 1].id);
 
         counter++;
     }
     if (counter >= MAX)
     {
-        printf("\033[32m" "La liste est complete\n" "\033[0m");
+        printf("\033[32m"
+               "La liste est complete\n"
+               "\033[0m");
         return;
     }
-        
 }
 
 int lister_avions()
@@ -68,7 +72,10 @@ int lister_avions()
     for (int i = 0; i < counter - 1; i++)
     {
         printf("Avion %d \n", i + 1);
-        printf("\033[33m" "ID: %d, Modele: %s, Capacite: %d, Status: %s, Date d'entree: %s\n" "\033[0m", avions[i].id, avions[i].modele, avions[i].capacite, avions[i].status, avions[i].date_entree);
+        printf("\033[33m"
+               "ID: %d, Modele: %s, Capacite: %d, Status: %s, Date d'entree: %s\n"
+               "\033[0m",
+               avions[i].id, avions[i].modele, avions[i].capacite, avions[i].status, avions[i].date_entree);
         printf("---------------------------------------------------------------------------- \n");
     }
     return 0;
@@ -114,24 +121,100 @@ int modifier_avion()
             printf("Donner la date d'entree d'avion: ");
             scanf(" %[^\n]", avions[i].date_entree);
 
-            printf("\033[32m" "Modification reussie!\n" "\033[0m" );
+            printf("\033[32m"
+                   "Modification reussie!\n"
+                   "\033[0m");
             break;
         }
     }
 
     if (!found)
     {
-        printf("\033[31m" "Avion avec ID %d non trouve\n" "\033[0m", searched_id);
+        printf("\033[31m"
+               "Avion avec ID %d non trouve\n"
+               "\033[0m",
+               searched_id);
     }
 
     return 0;
 }
+int rechercher_model()
+{
+    char searched_model[10];
+    int found = 0;
+
+    printf("Entrez un modele: ");
+    scanf(" %[^\n]", searched_model);
+
+    for (int i = 0; i < counter; i++)
+    {
+        if (strcmp(searched_model, avions[i].modele) == 0)
+        {
+            found = 1;
+            printf("\033[32m"
+                   "ID: %d, Modele: %s, Capacite: %d, Status: %s, Date d'entree: %s\n"
+                   "\033[0m",
+                   avions[i].id, avions[i].modele, avions[i].capacite, avions[i].status, avions[i].date_entree);
+            printf("---------------------------------------------------------------------------- \n");
+            return 1;
+        }
+    }
+    if (!found)
+    {
+        printf("\033[31m"
+              "Avion avec ID %d non trouve\n"
+              "\033[0m",
+              searched_model);
+    }
+}
 int rechercher_id(int searched_id)
 {
+    int found = 0;
+
+    for (int i = 0; i < counter; i++)
+    {
+        if (searched_id == avions[i].id)
+        {
+            found = 1;
+            printf("\033[32m"
+                   "ID: %d, Modele: %s, Capacite: %d, Status: %s, Date d'entree: %s\n"
+                   "\033[0m",
+                   avions[i].id, avions[i].modele, avions[i].capacite, avions[i].status, avions[i].date_entree);
+            printf("---------------------------------------------------------------------------- \n");
+            return 1;
+        }
+    }
+    if (!found)
+    {
+        printf("\033[31m"
+               "Avion avec ID %d non trouve\n"
+               "\033[0m",
+               searched_id);
+    }
 }
 
 int rechercher_avion()
 {
+    int searched_id;
+    int search_choise;
+    printf("Donner le mode de recherche [1:id ,2:modele]: ");
+
+    scanf("%d", &search_choise);
+
+    switch (search_choise)
+    {
+    case 1:
+        printf("Entrez un id: ");
+        scanf("%d", &searched_id);
+        rechercher_id(searched_id);
+        break;
+    case 2:
+        rechercher_model();
+        break;
+    default:
+
+        break;
+    }
 }
 
 int supprimer_avion()
@@ -140,7 +223,7 @@ int supprimer_avion()
 
 int main_menu()
 {
-   int choise; 
+    int choise;
 
     do
     {
