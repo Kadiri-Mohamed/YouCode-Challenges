@@ -47,13 +47,13 @@ void ajouter_avion()
         printf("Donner la date d'entree d'avion (JJ/MM/AAAA): ");
         scanf(" %[^\n]", date_entree[counter - 1]);
 
-        printf("Avion ajoute avec succes avec l id = %d\n", id[counter - 1]);
+        printf("\033[32m" "Avion ajoute avec succes avec l'id = %d\n" "\033[0m", id[counter - 1]);
 
         counter++;
     }
     if (counter >= MAX)
     {
-        printf("La liste est complete\n");
+        printf("\033[32m" "La liste est complete\n" "\033[0m");
         return;
     }
 }
@@ -64,7 +64,7 @@ int lister_avions()
     for (int i = 0; i < counter - 1; i++)
     {
         printf("Avion %d \n", i + 1);
-        printf("ID: %d, Modele: %s, Capacite: %d, Status: %s, Date d'entree: %s\n", id[i], modele[i], capacite[i], status[i], date_entree[i]);
+        printf("\033[33m" "ID: %d, Modele: %s, Capacite: %d, Status: %s, Date d'entree: %s\n" "\033[0m", id[i], modele[i], capacite[i], status[i], date_entree[i]);
         printf("---------------------------------------------------------------------------- \n");
     }
     return 0;
@@ -110,14 +110,14 @@ int modifier_avion()
             printf("Donner la date d'entree d'avion: ");
             scanf(" %[^\n]", date_entree[i]);
 
-            printf("Modification reussie!\n");
+            printf("\033[32m" "Modification reussie!\n" "\033[0m" );
             break;
         }
     }
 
     if (!found)
     {
-        printf("Avion avec ID %d non trouve\n", searched_id);
+        printf("\033[31m" "Avion avec ID %d non trouve\n" "\033[0m", searched_id);
     }
 
     return 0;
@@ -136,7 +136,7 @@ int rechercher_model()
         if (strcmp(searched_model, modele[i]) == 0)
         {
             found = 1;
-            printf("ID: %d, Modele: %s, Capacite: %d, Status: %s, Date d'entree: %s\n", id[i], modele[i], capacite[i], status[i], date_entree[i]);
+            printf("\033[32m" "ID: %d, Modele: %s, Capacite: %d, Status: %s, Date d'entree: %s\n" "\033[0m", id[i], modele[i], capacite[i], status[i], date_entree[i]);
             printf("---------------------------------------------------------------------------- \n");
             return 1;
         }
@@ -156,14 +156,14 @@ int rechercher_id(int searched_id)
         if (searched_id == id[i])
         {
             found = 1;
-            printf("ID: %d, Modele: %s, Capacite: %d, Status: %s, Date d'entree: %s\n", id[i], modele[i], capacite[i], status[i], date_entree[i]);
+            printf("\033[32m" "ID: %d, Modele: %s, Capacite: %d, Status: %s, Date d'entree: %s\n" "\033[0m", id[i], modele[i], capacite[i], status[i], date_entree[i]);
             printf("---------------------------------------------------------------------------- \n");
             return id[i];
         }
     }
     if (!found)
     {
-        printf("Avion avec ID %d non trouve\n", searched_id);
+        printf("\033[31m" "Avion avec ID %d non trouve\n" "\033[0m", searched_id);
     }
 }
 
@@ -213,13 +213,13 @@ int supprimer_avion()
                 strcpy(date_entree[j], date_entree[j + 1]);
             }
             counter--;
-            printf("Avion avec ID %d supprime avec succes\n", searched_id);
+            printf("\033[32m" "Avion avec ID %d supprime avec succes\n" "\033[0m", searched_id);
             break;
         }
     }
     if (!found)
     {
-        printf("Avion avec ID %d non trouve\n", searched_id);
+        printf("\033[31m" "Avion avec ID %d non trouve\n" "\033[0m", searched_id);
     }
     return 0;
 }
