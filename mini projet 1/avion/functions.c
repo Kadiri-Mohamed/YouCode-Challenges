@@ -219,6 +219,33 @@ int rechercher_avion()
 
 int supprimer_avion()
 {
+    int searched_id;
+    int found = 0;
+    printf("Entrez un id: ");
+    scanf("%d", &searched_id);
+    for (int i = 0; i < counter; i++)
+    {
+        if (searched_id == avions[i].id)
+        {
+            found = 1;
+            for (int j = i; j < counter - 1; j++)
+            {
+                avions[j].id = avions[j + 1].id;
+                strcpy(avions[j].modele, avions[j + 1].modele);
+                avions[j].capacite = avions[j + 1].capacite;
+                strcpy(avions[j].status, avions[j + 1].status);
+                strcpy(avions[j].date_entree, avions[j + 1].date_entree);
+            }
+            counter--;
+            printf("\033[32m" "Avion avec ID %d supprime avec succes\n" "\033[0m", searched_id);
+            break;
+        }
+    }
+    if (!found)
+    {
+        printf("\033[31m" "Avion avec ID %d non trouve\n" "\033[0m", searched_id);
+    }
+    return 0;
 }
 
 int main_menu()
