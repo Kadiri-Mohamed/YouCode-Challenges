@@ -1,6 +1,9 @@
 #ifndef HEADERS_H
 #define HEADERS_H
 #define MAX 100
+#define Title "Application de gestion aeroport fictif et son parc d'avions"
+#include <unistd.h>
+#include <stdlib.h>
 #include <string.h>
 
 // extern int choise;
@@ -12,10 +15,10 @@
 // extern int counter;
 
 void ajouter_avion();
-int lister_avions();
-int modifier_avion();
-int supprimer_avion();
-int rechercher_avion();
-int main_menu();
+void lister_avions();
+void modifier_avion(int searched_id);
+void supprimer_avion(int searched_id);
+void rechercher_avion(int search_choise);
+void main_menu();
 
 #endif
