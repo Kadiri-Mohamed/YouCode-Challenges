@@ -318,10 +318,27 @@ void get_min_max_capacite(Avion table[MAX])
 {
     tri_avions_capacite(table);
 
-    printf("\033[32m""Grand capacite : %d , avions id : %d \n""\033[0m" , table[counter - 1].capacite, table[counter - 1].id);
-    printf("\033[32m""Petite capacite : %d , avions id : %d \n""\033[0m" , table[0].capacite, table[0].id);
+    printf("\033[32m"
+           "Grand capacite : %d , avions id : %d \n"
+           "\033[0m",
+           table[counter - 1].capacite, table[counter - 1].id);
+    printf("\033[32m"
+           "Petite capacite : %d , avions id : %d \n"
+           "\033[0m",
+           table[0].capacite, table[0].id);
 }
 
+void get_somme_capacite(Avion table[MAX])
+{
+    int somme = 0;
+    for (int i = 0; i < counter; i++)
+    {
+        somme += table[i].capacite;
+    }
+    printf("\033[32m"
+           "la somme des capacites est : %d\n"
+           "\033[0m", somme);
+}
 
 void main_menu()
 {
@@ -381,6 +398,10 @@ void main_menu()
         case 7:
             system("cls");
             get_min_max_capacite(avions);
+            break;
+        case 8:
+            system("cls");
+            get_somme_capacite(avions);
             break;
         case 0:
             system("cls");

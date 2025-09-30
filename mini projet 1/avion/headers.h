@@ -6,13 +6,6 @@
 #include <stdlib.h>
 #include <string.h>
 
-// extern int choise;
-// extern int id[MAX];
-// extern int capacite[MAX];
-// extern char modele[MAX][20];
-// extern char status[MAX][20];
-// extern char date_entree[MAX][20];
-// extern int counter;
 typedef struct
 {
     int id;
@@ -28,6 +21,7 @@ void modifier_avion(int searched_id);
 void supprimer_avion(int searched_id);
 void rechercher_avion(int search_choise);
 void get_min_max_capacite(Avion table[MAX]);
+void get_somme_capacite(Avion table[MAX]);
 void main_menu();
 
 #endif
