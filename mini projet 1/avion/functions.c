@@ -3,14 +3,6 @@
 #include <stdlib.h>
 #include "headers.h"
 
-typedef struct
-{
-    int id;
-    char modele[20];
-    int capacite;
-    char status[20];
-    char date_entree[20];
-} Avion;
 Avion avions[MAX];
 int counter = 0;
 int counter_id = 0;
@@ -20,7 +12,7 @@ void ajouter_avion()
     int num_avions;
     printf("Combien d'avions ? ");
     scanf("%d", &num_avions);
-    
+
     if (counter + num_avions >= MAX)
     {
         printf("\033[31m"
@@ -29,7 +21,7 @@ void ajouter_avion()
                num_avions);
         return;
     }
-    
+
     for (int i = 0; i < num_avions; i++)
     {
         avions[counter].id = counter_id + 1;
@@ -65,10 +57,10 @@ void ajouter_avion()
                "Avion ajoute avec succes avec l'id = %d\n"
                "\033[0m",
                avions[counter].id);
-        counter_id ++;
+        counter_id++;
         counter++;
     }
-    
+
     if (counter >= MAX)
     {
         printf("\033[32m"
@@ -87,7 +79,7 @@ void lister_avions()
                "\033[0m");
         return;
     }
-    
+
     printf("Liste des avions:\n");
     for (int i = 0; i < counter; i++)
     {
@@ -322,6 +314,15 @@ void supprimer_avion(int searched_id)
     }
 }
 
+void get_min_max_capacite(Avion table[MAX])
+{
+    tri_avions_capacite(table);
+
+    printf("\033[32m""Grand capacite : %d , avions id : %d \n""\033[0m" , table[counter - 1].capacite, table[counter - 1].id);
+    printf("\033[32m""Petite capacite : %d , avions id : %d \n""\033[0m" , table[0].capacite, table[0].id);
+}
+
+
 void main_menu()
 {
     int choise;
@@ -376,6 +377,10 @@ void main_menu()
             printf("Donner le mode de tri [1:capacite ,2:modele]: ");
             scanf("%d", &tri_choise);
             tri_avions(tri_choise);
+            break;
+        case 7:
+            system("cls");
+            get_min_max_capacite(avions);
             break;
         case 0:
             system("cls");

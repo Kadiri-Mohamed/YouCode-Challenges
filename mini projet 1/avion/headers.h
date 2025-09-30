@@ -13,12 +13,21 @@
 // extern char status[MAX][20];
 // extern char date_entree[MAX][20];
 // extern int counter;
+typedef struct
+{
+    int id;
+    char modele[20];
+    int capacite;
+    char status[20];
+    char date_entree[20];
+} Avion;
 
 void ajouter_avion();
 void lister_avions();
 void modifier_avion(int searched_id);
 void supprimer_avion(int searched_id);
 void rechercher_avion(int search_choise);
+void get_min_max_capacite(Avion table[MAX]);
 void main_menu();
 
 #endif
