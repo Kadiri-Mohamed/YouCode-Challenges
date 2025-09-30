@@ -13,7 +13,7 @@ typedef struct
 } Avion;
 Avion avions[MAX];
 int counter = 0;
-
+int counter_id = 0;
 void ajouter_avion()
 {
     int status_choise;
@@ -32,7 +32,7 @@ void ajouter_avion()
     
     for (int i = 0; i < num_avions; i++)
     {
-        avions[counter].id = counter + 1;
+        avions[counter].id = counter_id + 1;
 
         printf("Donner le modele d'avion: ");
         scanf(" %[^\n]", avions[counter].modele);
@@ -65,7 +65,7 @@ void ajouter_avion()
                "Avion ajoute avec succes avec l'id = %d\n"
                "\033[0m",
                avions[counter].id);
-
+        counter_id ++;
         counter++;
     }
     
