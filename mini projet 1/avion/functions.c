@@ -1,4 +1,6 @@
 #include <stdio.h>
+#include <string.h>
+#include <stdlib.h>
 #include "headers.h"
 
 typedef struct
@@ -10,7 +12,7 @@ typedef struct
     char date_entree[20];
 } Avion;
 Avion avions[MAX];
-int counter = 1;
+int counter = 0;
 
 void ajouter_avion()
 {
@@ -18,45 +20,55 @@ void ajouter_avion()
     int num_avions;
     printf("Combien d'avions ? ");
     scanf("%d", &num_avions);
+    
+    if (counter + num_avions >= MAX)
+    {
+        printf("\033[31m"
+               "Impossible d'ajouter %d avions. Capacite maximale depassee.\n"
+               "\033[0m",
+               num_avions);
+        return;
+    }
+    
     for (int i = 0; i < num_avions; i++)
     {
-
-        avions[counter - 1].id = counter;
+        avions[counter].id = counter + 1;
 
         printf("Donner le modele d'avion: ");
-        scanf(" %[^\n]", avions[counter - 1].modele);
+        scanf(" %[^\n]", avions[counter].modele);
 
         printf("Donner la capacite d'avion: ");
-        scanf("%d", &avions[counter - 1].capacite);
+        scanf("%d", &avions[counter].capacite);
 
         printf("Donner le status d'avion [1:disponible ,2:En maintenece ,3:En vole]: ");
         scanf("%d", &status_choise);
         switch (status_choise)
         {
         case 1:
-            strcpy(avions[counter - 1].status, "Disponible");
+            strcpy(avions[counter].status, "Disponible");
             break;
         case 2:
-            strcpy(avions[counter - 1].status, "En maintenece");
+            strcpy(avions[counter].status, "En maintenece");
             break;
         case 3:
-            strcpy(avions[counter - 1].status, "En vole");
+            strcpy(avions[counter].status, "En vole");
             break;
         default:
-            strcpy(avions[counter - 1].status, "Status invalide");
+            strcpy(avions[counter].status, "Status invalide");
             break;
         }
 
         printf("Donner la date d'entree d'avion (JJ/MM/AAAA): ");
-        scanf(" %[^\n]", avions[counter - 1].date_entree);
+        scanf(" %[^\n]", avions[counter].date_entree);
 
         printf("\033[32m"
                "Avion ajoute avec succes avec l'id = %d\n"
                "\033[0m",
-               avions[counter - 1].id);
+               avions[counter].id);
 
         counter++;
     }
+    
     if (counter >= MAX)
     {
         printf("\033[32m"
@@ -68,8 +80,16 @@ void ajouter_avion()
 
 void lister_avions()
 {
+    if (counter == 0)
+    {
+        printf("\033[33m"
+               "Aucun avion dans la liste\n"
+               "\033[0m");
+        return;
+    }
+    
     printf("Liste des avions:\n");
-    for (int i = 0; i < counter - 1; i++)
+    for (int i = 0; i < counter; i++)
     {
         printf("Avion %d \n", i + 1);
         printf("\033[33m"
@@ -83,7 +103,6 @@ void lister_avions()
 void modifier_avion(int searched_id)
 {
     int status_choise;
-
     int found = 0;
 
     for (int i = 0; i < counter; i++)
@@ -133,13 +152,14 @@ void modifier_avion(int searched_id)
                searched_id);
     }
 }
+
 void tri_avions_model(Avion table[MAX])
 {
     Avion temp;
 
-    for (int i = 0; i < counter - 2; i++)
+    for (int i = 0; i < counter - 1; i++)
     {
-        for (int j = 0; j < counter - i - 2; j++)
+        for (int j = 0; j < counter - i - 1; j++)
         {
             if (strcasecmp(table[j].modele, table[j + 1].modele) > 0)
             {
@@ -151,32 +171,47 @@ void tri_avions_model(Avion table[MAX])
     }
 }
 
+void tri_avions_capacite(Avion table[MAX])
+{
+    Avion temp;
+
+    for (int i = 0; i < counter - 1; i++)
+    {
+        for (int j = 0; j < counter - i - 1; j++)
+        {
+            if (table[j].capacite > table[j + 1].capacite)
+            {
+                temp = table[j];
+                table[j] = table[j + 1];
+                table[j + 1] = temp;
+            }
+        }
+    }
+}
+
 void tri_avions(int tri_choise)
 {
-
     switch (tri_choise)
     {
+    case 1:
+        tri_avions_capacite(avions);
+        lister_avions();
+        break;
 
-    // case 1:
-    //     char searched_model[10];
-    //     printf("Entrez un model: ");
-    //     scanf(" %[^\n]", &searched_model);
-    //     rechercher_model(searched_model);
-    //     break;
     case 2:
         tri_avions_model(avions);
         lister_avions();
         break;
     default:
-
         break;
     }
 }
-int rechercher_model(char searched_model[20]) 
+
+int rechercher_model(char searched_model[20])
 {
     tri_avions_model(avions);
 
-    int start = 0, end = counter - 2;
+    int start = 0, end = counter - 1;
     int center;
 
     while (start <= end)
@@ -203,7 +238,9 @@ int rechercher_model(char searched_model[20])
             end = center - 1;
         }
     }
+    return 0;
 }
+
 int rechercher_id(int searched_id)
 {
     int found = 0;
@@ -228,34 +265,36 @@ int rechercher_id(int searched_id)
                "\033[0m",
                searched_id);
     }
+    return 0;
 }
 
 void rechercher_avion(int search_choise)
 {
-
     switch (search_choise)
     {
     case 1:
+    {
         int searched_id;
         printf("Entrez un id: ");
         scanf("%d", &searched_id);
         rechercher_id(searched_id);
         break;
+    }
     case 2:
-        char searched_model[10];
+    {
+        char searched_model[20];
         printf("Entrez un model: ");
-        scanf(" %[^\n]", &searched_model);
+        scanf(" %[^\n]", searched_model);
         rechercher_model(searched_model);
         break;
+    }
     default:
-
         break;
     }
 }
 
 void supprimer_avion(int searched_id)
 {
-
     int found = 0;
     for (int i = 0; i < counter; i++)
     {
@@ -264,11 +303,7 @@ void supprimer_avion(int searched_id)
             found = 1;
             for (int j = i; j < counter - 1; j++)
             {
-                avions[j].id = avions[j + 1].id;
-                strcpy(avions[j].modele, avions[j + 1].modele);
-                avions[j].capacite = avions[j + 1].capacite;
-                strcpy(avions[j].status, avions[j + 1].status);
-                strcpy(avions[j].date_entree, avions[j + 1].date_entree);
+                avions[j] = avions[j + 1];
             }
             counter--;
             printf("\033[32m"
@@ -293,7 +328,6 @@ void main_menu()
 
     do
     {
-        // system("cls");
         printf("Pour ajouter un avion entrez 1\n");
         printf("Pour modifier un avion entrez 2\n");
         printf("Pour supprimer un avion entrez 3\n");
@@ -348,6 +382,7 @@ void main_menu()
             printf("End of programme\n");
             break;
         default:
+            system("cls");
             printf("choix invalide\n");
             break;
         }
